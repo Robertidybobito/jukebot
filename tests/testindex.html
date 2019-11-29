@@ -1,18 +1,23 @@
 <html>
 <head>
-	<link rel="stylesheet" href="/testcss.css">
-	<script type="text/javascript" src="testsjavascript.js"></script></script>
+	<link rel="stylesheet" href="./testcss.css">
+	<script type="text/javascript" src="./testsjavascript.js"></script>
 </head>
 <nav>
 	<h1 class="title">Jukebox</h1>
 	<div class="navlinks">
-		<a href="/testpage2">to page 2</a>
+		<a href="./testpage2.html">to page 2</a>
 	</div>
 </nav>
 <body>
-	<!-- section for the jukebox player
-	
-	-->
+	<div id="commandslayer">
+		<button onclick="startVid()" type="button">Start Video</button>
+		<button onclick="playPause()" type="button">Play/Pause</button>
+	</div>
+	<div id="musicplayerlayer">
+		<video id="musicplayer" width="400">
+		</video>
+	</div>
 </body>
 <footer>
 
