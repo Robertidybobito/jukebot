@@ -9,3 +9,5 @@
 7. List of Views and their short description (No more than 50 words for each view)
 8. List of Tables, their Structure and short description
 9. References/Resources: List all the references, resources or the online templates that were used for the project.
+
+https://canvas.umn.edu/courses/134934/assignments/846130
