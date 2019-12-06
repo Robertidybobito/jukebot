@@ -1,4 +1,4 @@
-# jukebox
+# Jukebot
 
 1. Project Type: Plan A or B or C
 2. Link to live Application:
