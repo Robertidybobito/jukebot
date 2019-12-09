@@ -1,20 +1,41 @@
 General format
 
 * go to jukebot.com, app('/')
-  * initial page load, main_jukebot
-    * gets the length of song_list
-    * define play_list size 7
-    * loop 4 times i = 0,1,2,3
+  * callable function find_song()
+    * i = 0
+    * while i < 100
       * r = random number between 0 and len(song_list)
       * song = song_list[song_id = r]
       * if song->flag_error = 0
-        * play_list[i] = song_list[song_id->r]
+        * return song_list[song_id->r]
+    * raise error, could not find a song after 100 attempts
+  * callable function build_playlist_table(play_list)
+    * clear table, table.innerHTML = ""
+    * loop 7 times 0,1,2,3,4,5,6
+      * if play_list[i] == null
+        * create an empty row
       * else
-        * i-- # need to retry adding a song to the play_list if there is it is known the song has an error
+        * create a row with play_list[i]->song_name and append to the table
+  * initial page load, __main__()
+    * gets the length of song_list
+    * define play_list size 7
+    * loop 4 times i = 0,1,2,3
+      * play_list[i] = find_song()
+    * loop 3 times i = 4,5,6
+      * play_list[i] = null
     * start playing song at play_list[3]
-  * if jukebox.com detects the currently playing song has ended
+  * if jukebox.com detects the currently playing song has ended, next_song()
     * get the length of song_list
-
+    * loop 6 times i = 5,4,3,2,1,0
+      * play_list[i+1] = play_list[i]
+    * start playing song at play_list[3]
+    * play_list[0] = find_song()
+  * if jukebox.com detects an error when trying to play a song, song_error()
+    * song = play_list[3]
+    * song->flag_error = 1
+    * next_song()
+    
+      
 
 ----
 tables
