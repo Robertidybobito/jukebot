@@ -12,7 +12,6 @@ go to jukebot.com, app('/')
       * else
         * i-- # need to retry adding a song to the play_list if there is it is known the song has an error
     * start playing song at play_list[3]
-
   * if jukebox.com detects the currently playing song has ended
     * get the length of song_list
 
