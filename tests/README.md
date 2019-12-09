@@ -1,6 +1,6 @@
 General format
 
-go to jukebot.com, app('/')
+* go to jukebot.com, app('/')
   * initial page load, main_jukebot
     * gets the length of song_list
     * define play_list size 7
