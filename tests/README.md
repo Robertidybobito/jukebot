@@ -1,20 +1,20 @@
 General format
 
 go to jukebot.com, app('/')
-  initial page load, main_jukebot
-    gets the length of song_list
-    define play_list size 7
-    loop 4 times i = 0,1,2,3
-      r = random number between 0 and len(song_list)
-      song = song_list[song_id = r]
-      if song->flag_error = 0
-        play_list[i] = song_list[song_id->r]
-      else
-        i-- # need to retry adding a song to the play_list if there is it is known the song has an error
-    start playing song at play_list[3]
+initial page load, main_jukebot
+gets the length of song_list
+define play_list size 7
+loop 4 times i = 0,1,2,3
+r = random number between 0 and len(song_list)
+song = song_list[song_id = r]
+if song->flag_error = 0
+play_list[i] = song_list[song_id->r]
+else
+i-- # need to retry adding a song to the play_list if there is it is known the song has an error
+start playing song at play_list[3]
 
-  if jukebox.com detects the currently playing song has ended
-    get the length of song_list
+if jukebox.com detects the currently playing song has ended
+get the length of song_list
     
 
 ----
