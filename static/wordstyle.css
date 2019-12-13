@@ -1,0 +1,53 @@
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: lightslategray;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.popup-content {
+    background-color: #ffffff;
+    margin: auto;
+    padding: 30px;
+    border: 1px black;
+    width: 80%;
+}
+
+.wordbox {
+    text-align: center;
+    border: solid white;
+    margin: 3px;
+}
+
+nav {
+    background-color: lightgray;
+}
+
+footer {
+    background-color: lightgray;
+}
+
+.name {
+    text-align: right;
+}
+
+.title {
+    text-align: center;
+}
+
+.githublink {
+    background-color: lightgray
+    text-align: left;
+}

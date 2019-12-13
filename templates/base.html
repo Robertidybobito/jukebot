@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/wordstyle.css">
+        <script type="text/javascript" src="/static/dictionary.js"></script>
+    </head>
+    <nav>
+        <h1 class="title">Word Finder</h1>
+        <div class="name">Robert Berquist</div>
+    </nav>
+    <body>
+        
+        {% block navbar %}
+        <nav>
+            <h1>Word List Program for {{name}}</h1>
+        </nav>
+        {% endblock %}
+
+        {% block content %}
+        default content
+        {% endblock %}
+    </body>
+    <footer>
+        <a href="https://github.umn.edu/berqu063/wordapp">GitHub Link</a>
+    </footer>
+</html>
