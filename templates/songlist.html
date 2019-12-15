@@ -3,7 +3,11 @@
 {% block content %}
 <main>
     {% for song in masterlist: %}
-        <div class="song">{{ song[0] }}</div>
+        <div class="masterlist">
+            id={{ song['id'] }}
+            name={{ song['name'] }}
+            url={{ song['url'] }}
+        </div>
     {% endfor %}
 </main>
 {% endblock %}

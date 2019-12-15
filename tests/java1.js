@@ -1,4 +1,6 @@
-var player;
+var player,
+    time_update_interval = 0;
+
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('video-placeholder', {

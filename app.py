@@ -39,17 +39,13 @@ csrf.init_app(app)
 db = SQLAlchemy(app)
 
 def getMasterList():
-    masterlist = db.session.execute('select * from MasterList join SongInfo')
+    masterlist = db.session.execute('select * from MasterList join SongInfo on song_id = id')
     return masterlist
 
-@app.route('/', methods=['POST','GET']) # POST and GET are for using the YouTube API
-def index(): 
+@app.route('/')
+def musicplayer(): 
     masterlist = getMasterList()
-    #masterlist = db.session.execute('select * from MasterList') # getMasterList()
-    #c_list = masterlist.fetchall()
-    #cols = masterlist.keys()
-    #curs = db.session.execute(
-    return render_template("songlist.html", masterlist=masterlist)
+    return render_template("musicplayer.html", masterlist=masterlist)
 
 #@app.route('/login')
 #def login():

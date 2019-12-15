@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<main>
+    <h1>Music Player</h1>
+   	<div id="video-placeholder"></div>
+    <div id="hiddenmasterlist">
+        {% for song in masterlist: %}
+            <div id="song">
+                <div id="id">{{ song['id'] }}</div>
+                <div id="name">{{ song['name'] }}</div>
+                <div id="url">{{ song['url'] }}</div>
+            </div>
+        {% endfor %}
+    </div>
+    <div id="playlisttable"></div>
+</main>    
+{% endblock %}
