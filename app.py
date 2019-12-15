@@ -1,12 +1,15 @@
-from flask import Flask, request, Response, render_template
+from flask import Flask, request, Response, render_template, g
 import requests
 import itertools
+from flask_sqlalchemy import SQL Alchemy
+from flask_bootstrap import Bootstrap
 from flask_wtf.csrf import CSRFProtect
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField
 from wtforms.validators import Regexp, Optional, NumberRange
 import re
 import json
+import records
 
 class NewSongForm(FlaskForm):
     song_name = StringField("Song Name", validators= [
@@ -30,39 +33,23 @@ class LoginForm(FlaskForm):
 csrf = CSRFProtect()
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "row the boat"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 csrf.init_app(app)
+db = SQLAlchemy(app)
 
 def getMasterList():
-	song_id
-	num_times_played
-	num_times_skipped
+	db = records.Database('postgres://database.db')
+    masterlist = db.query('select * from MasterList join SongInfo on song_id = song_id')
 
-def getSongInfo(song_id): # uses the SQL database to return information about the song
-	song_id
-	user_id
-	song_name
-	song_url
-	date_added
-
-def getUserInfo(user_id):
-	user_id
-	user_name
-	user_email
-	last_login
-
-# Load the main page with the full song list table. Javascript will handle playing the videos.
-# When a song ends, the Javascript will use the returned list to find the next song to play
-# Need some way for Javascript to call one of these functions for when an error occurs
-# 	Might be possible https://www.quora.com/How-do-I-run-a-Python-script-onclick-event-from-JavaScript
-#	Problem is Python function typically run by the HTML request. Might need to load every video first..?
-#	That, or have Javascript edit the SQL list. I don't like that for security reasons
-#	Maybe make a new HTML request for every song..? Or only when this happens to remove the problem song from the active playlist
 @app.route('/', methods=['POST','GET']) # POST and GET are for using the YouTube API
 def index(): 
-	playlist = getMasterList()
+    masterlist = getMasterList()
+    #masterlist = db.session.execute('select * from MasterList') # getMasterList()
+    #c_list = masterlist.fetchall()
+    #cols = masterlist.keys()
+    #curs = db.session.execute(
     return render_template("index.html", 
-		playlist=sorted(song_id
-		name="playlist") # name="CS4131") ?
+		                   masterlist=masterlist)
 
 @app.route('/login')
 def login():
