@@ -51,3 +51,7 @@ footer {
     background-color: lightgray
     text-align: left;
 }
+
+.hiddenmasterlist {
+    display: none;
+}
