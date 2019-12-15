@@ -2,14 +2,8 @@
 
 {% block content %}
 <main>
-    {% for word in wordlist: %}
-        <div class="wordbox" id="wordbox" onclick="openpopup(this)">{{ word[0] }}
-        <div class="popup" id="popup">
-            <div class="popup-content">
-                {{ word[1] }}
-            </div>
-        </div>
-        </div>
+    {% for song in masterlist: %}
+        <div class="song">{{ song[0] }}</div>
     {% endfor %}
 </main>
 {% endblock %}

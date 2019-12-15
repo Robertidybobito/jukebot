@@ -1,8 +1,8 @@
 from flask import Flask, request, Response, render_template, g
 import requests
 import itertools
-from flask_sqlalchemy import SQL Alchemy
-from flask_bootstrap import Bootstrap
+from flask_sqlalchemy import SQLAlchemy
+#from flask_bootstrap import Bootstrap
 from flask_wtf.csrf import CSRFProtect
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField
@@ -23,12 +23,13 @@ class NewSongForm(FlaskForm):
     submit = SubmitField("Submit")
 
 class LoginForm(FlaskForm):
-	username = StringField("Username", validators= [
-		Optional(strip_whitespace=True)
-	])
-	password = StringField("Password", validators= [
-		Optional(strip_whitespace=True)
-	]
+    username = StringField("Username", validators= [
+	    Optional(strip_whitespace=True)
+    ])
+    password = StringField("Password", validators= [
+	    Optional(strip_whitespace=True)
+    ])
+    login = SubmitField("Login")
 
 csrf = CSRFProtect()
 app = Flask(__name__)
@@ -38,8 +39,8 @@ csrf.init_app(app)
 db = SQLAlchemy(app)
 
 def getMasterList():
-	db = records.Database('postgres://database.db')
-    masterlist = db.query('select * from MasterList join SongInfo on song_id = song_id')
+    masterlist = db.session.execute('select * from MasterList join SongInfo')
+    return masterlist
 
 @app.route('/', methods=['POST','GET']) # POST and GET are for using the YouTube API
 def index(): 
@@ -48,20 +49,19 @@ def index():
     #c_list = masterlist.fetchall()
     #cols = masterlist.keys()
     #curs = db.session.execute(
-    return render_template("index.html", 
-		                   masterlist=masterlist)
+    return render_template("songlist.html", masterlist=masterlist)
 
-@app.route('/login')
-def login():
-	form = LoginForm()
+#@app.route('/login')
+#def login():
+#	form = LoginForm()
 	
 @app.route('/editlist') # maybe change to /login/robert or /login/fritzy
-def editlist();
+def editlist():
 	form = NewSongForm()
 	return render_template("editlist.html", form=form)
 
-@app.route('/words', methods=['POST','GET'])
-def letters_2_words():
+#@app.route('/words', methods=['POST','GET'])
+#def letters_2_words():
 	
 
 @app.route('/proxy')
