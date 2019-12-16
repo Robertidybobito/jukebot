@@ -1,23 +1,35 @@
 var player;
 var songlist = [];
 var playlist = [];
+    playlist.length = 7;
 
 function onYouTubeIframeAPIReady() {
 	buildMasterList();
     player = new YT.Player('youtubeplayer', {
         width: 600,
         height: 400,
-        videoId: '',
+        videoId: playlist[3][1],
         events: {
-            onReady: buildMasterList
-        }
+			'onReady': onPlayerReady,
+			'onStateChange': onPlayerStateChange
+		}
     });
 }
-/*
-function onPlayerStateChange(event) {
-	if (event.data == YT.PlayerState.PLAYING && !done
+
+function onPlayerReady(event) {
+	event.target.playVideo();
 }
-*/
+
+function onPlayerStateChange(event) {
+	var state = player.getPlayerState();
+	if (state == "0") {
+		pickSong();
+		buildTable();
+		player.loadVideoById({videoId:playlist[3][1],
+			                  startSeconds:1});
+	}
+}
+
 function buildMasterList() {
 	var list = document.getElementById("hiddenmasterlist");
 	for (var i=1, l=list.childNodes.length; i<l; i=i+2) {
@@ -80,8 +92,13 @@ function buildTable() {
 			if (playlist[index] == undefined) {
 				td.innerHTML = "";
 			} else {
-				td.innerHTML = "YouTube";
-				td.setAttribute("href", playlist[index][0]['url']);
+				var a = document.createElement('a');
+				var link = document.createTextNode("YouTube");
+				a.appendChild(link);
+				// a.title = "Hover link text";
+				a.href = playlist[index][0]['url'];
+				a.target = "_blank";
+				td.appendChild(a);
 			}
 			tr.appendChild(td);
 			
@@ -94,15 +111,11 @@ function buildTable() {
 	var justplayed = document.getElementById("justplayed");
 	
 	upnext.innerHTML = "Up Next";
-	table(upnext, [0,1,2]);
+	table(upnext, [6,5,4]);
 	
 	currentsong.innerHTML = "Current Song";
 	table(currentsong, [3]);
 	
 	justplayed.innerHTML = "Just Played";
-	table(justplayed, [4,5,6]);
-}
-
-function jukeboxLoop() {
-	
+	table(justplayed, [0,1,2]);
 }
