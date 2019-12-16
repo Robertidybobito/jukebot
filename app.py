@@ -43,7 +43,11 @@ def getUserList():
     
 def getSongList():
     return db.session.execute('select * from MasterList join SongInfo')
-
+    
+def getMasterList():
+    #return db.session.execute('select song_id, name, url, user_name, flag_error from MasterList join SongInfo on song_id join UserInfo on user_id')
+    return db.session.execute('select * from MasterList join SongInfo join UserInfo')
+    
 @app.route('/')
 def musicplayer(): 
     songlist = getSongList()
@@ -52,13 +56,11 @@ def musicplayer():
 
 @app.route('/songlist')
 def masterlist():
-    songlist = getSongList()
-    userlist = getUserList()
+    masterlist = getMasterList()
     return render_template("songlist.html", 
-                            songlist=songlist,
-			    userlist=userlist)
+                            masterlist=masterlist)
 	
-@app.route('/editlist') # maybe change to /login/robert or /login/fritzy
+@app.route('/editlist')
 def editlist():
 	form = NewSongForm()
 	return render_template("editlist.html", form=form)
