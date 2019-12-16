@@ -47,6 +47,9 @@ def getSongList():
 def getMasterList(sort):
     return db.session.execute('select song_id, name, url, user_name, flag_error from MasterList join SongInfo on song_id=song_id_ join UserInfo on user_id=user_id_ {}'.format(sort))
     
+def getEditList(user):
+    return db.session.execute('select song_id, name, url, user_name, flag_error from MasterList join SongInfo on song_id=song_id_ join UserInfo on user_id=user_id_ where user_name="{}" order by song_id'.format(user))
+    
 @app.route('/')
 def musicplayer(): 
     songlist = getSongList()
@@ -70,14 +73,18 @@ def masterlist(input):
 			    currentpage=input)
 			    
 @app.route('/editlist')
-def editlist():
-	form = NewSongForm()
-	return render_template("editlist.html", form=form)
+def selectlist():
+    userlist = getUserList()
+    return render_template("selectuser.html", 
+			    userlist=userlist)
 
-#@app.route('/words', methods=['POST','GET'])
-#def letters_2_words():
-	
-
+@app.route('/editlist/<username>')
+def editlist(username):
+    editlist = getEditList(username)
+    return render_template("editlist.html",
+                            editlist=editlist,
+			    username=username)
+    
 @app.route('/proxy')
 def proxy():
     result = requests.get(request.args['url'])

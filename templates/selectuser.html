@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<main>
+<h1>Select User</h1>
+{% for user in userlist: %}
+        <button><a href="./editlist/{{ user['user_name'] }}">{{ user['user_name'] }}</a></button>
+{% endfor %}
+
+</main>
+{% endblock %}
