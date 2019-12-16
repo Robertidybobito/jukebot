@@ -1,14 +1,13 @@
 {% extends "base.html" %}
-
 {% block content %}
+<h1>Music Player</h1>
 <main>
-    {% for song in masterlist: %}
-        <div class="masterlist">
-            id={{ song['id'] }}
-            name={{ song['name'] }}
-            url={{ song['url'] }}
-        </div>
-    {% endfor %}
+    <div id="upnext"></div>
+    <div id="player">
+        <div id="youtubeplayer"></div>
+        <div id="currentsong"></div>
+    </div>
+    <div id="justplayed"></div>
 </main>
 <div class="hiddensonglist" id="hiddensonglist">
 {% for song in songlist: %}
@@ -16,8 +15,6 @@
         <div id="song_id">{{ song['song_id'] }}</div>
         <div id="name">{{ song['name'] }}</div>
         <div id="url">{{ song['url'] }}</div>
-        <div id="user">{{ song['user_name'] }}</div>
-        <div id="error">{{ song['flag_error'] }}</div>
     </div>
 {% endfor %}
 </div>
