@@ -1,19 +1,29 @@
 var player;
 var songlist = [];
-var playlist = [];
-    playlist.length = 7;
+var userlist = [];
 
-function buildSongList() {
-	var list = document.getElementById("hiddenmasterlist");
-	for (var i=1, l=list.childNodes.length; i<l; i=i+2) {
+function buildLists() {
+	var slist = document.getElementById("hiddensonglist");
+	for (var i=1, l=slist.childNodes.length; i<l; i=i+2) {
 		var song = {};
-		song["song_id"]=list.childNodes[i].childNodes[1].innerHTML;
-		song["name"]=list.childNodes[i].childNodes[3].innerHTML;
-		song["url"]=list.childNodes[i].childNodes[5].innerHTML;
-		song["user"]=list.childNodes[i].childNodes[7].innerHTML;
-		song["flag_error"]=list.childNodes[i].childNodes[9].innerHTML;
+		song["song_id"]=slist.childNodes[i].childNodes[1].innerHTML;
+		song["name"]=slist.childNodes[i].childNodes[3].innerHTML;
+		song["url"]=slist.childNodes[i].childNodes[5].innerHTML;
+		song["user"]=slist.childNodes[i].childNodes[7].innerHTML;
+		song["flag_error"]=slist.childNodes[i].childNodes[9].innerHTML;
 		songlist.push(song);
 	}
+	var ulist = document.getElementById("hiddenuserlist");
+	for (var i=1, l=ulist.childNodes.length; i<l; i=i+2) {
+		var user = {};
+		user["user_id"]=ulist.childNodes[i].childNodes[1].innerHTML;
+		user["user_name"]=ulist.childNodes[i].childNodes[3].innerHTML;
+		userlist.push(user);
+	}
+	console.log("slist = " + slist);
+	console.log("songlist = " + songlist);
+	console.log("ulist = " + ulist);
+	console.log("userlist = " + userlist);
 	buildSongTable();
 }
 
@@ -49,49 +59,50 @@ function buildSongTable() {
 	function table(tbl, range) {
 		tabletitle(tbl);
 		var tr, td;
-		for (var i in range) {
-			var index = range[i];
+		for (var i in songlist) {
+			console.log("songlist[i] = " + songlist[i]);
+			var index = songlist[i];
 			tr = document.createElement("tr");
 			tbl.appendChild(tr);
 			
+			// Song ID
+			td = document.createElement("td");
+			td.innerHTML = songlist[index]['song_id'];
+			tr.appendChild(td);
+			
 			// Song name
 			td = document.createElement("td");
-			if (playlist[index] == undefined) {
-				td.innerHTML = "";
-			} else {
-				td.innerHTML = playlist[index][0]['name'];
-			}
+			td.innerHTML = playlist[index]['name'];
 			tr.appendChild(td);
 			
 			// Song link
 			td = document.createElement("td");
-			if (playlist[index] == undefined) {
-				td.innerHTML = "";
-			} else {
-				var a = document.createElement('a');
-				var link = document.createTextNode("YouTube");
-				a.appendChild(link);
-				// a.title = "Hover link text";
-				a.href = playlist[index][0]['url'];
-				a.target = "_blank";
-				td.appendChild(a);
-			}
+			
+			var a = document.createElement('a');
+			var link = document.createTextNode("YouTube");
+			a.appendChild(link);
+			a.href = playlist[index]['url'];
+			a.target = "_blank";
+			td.appendChild(a);
+			
 			tr.appendChild(td);
 			
-			tbl.appendChild(tr);			
+			tbl.appendChild(tr);
+			
+			// User name
+			td = document.createElement("td");
+			td.innerHTML = playlist[index]['name'];
+			tr.appendChild(td);
+			
+			// Song name
+			td = document.createElement("td");
+			td.innerHTML = playlist[index]['name'];
+			tr.appendChild(td);
 		}
 	}
 	
-	var upnext = document.getElementById("upnext");
-	var currentsong = document.getElementById("currentsong");
-	var justplayed = document.getElementById("justplayed");
-	
-	upnext.innerHTML = "Up Next";
-	table(upnext, [4,5,6]);
-	
-	currentsong.innerHTML = "Current Song";
-	table(currentsong, [3]);
-	
-	justplayed.innerHTML = "Just Played";
-	table(justplayed, [2,1,0]);
+	var masterlist = document.getElementById("masterlist");
+	table(masterlist);
 }
+
+window.addEventListener("load", buildLists);

@@ -39,12 +39,10 @@ csrf.init_app(app)
 db = SQLAlchemy(app)
 
 def getUserList():
-    userlist = db.session.execute('select * from UserInfo')
-    return userlist
-
+    return db.session.execute('select * from UserInfo')
+    
 def getSongList():
-    songlist = db.session.execute('select * from MasterList join SongInfo on song_id = id')
-    return songlist    
+    return db.session.execute('select * from MasterList join SongInfo')
 
 @app.route('/')
 def musicplayer(): 
