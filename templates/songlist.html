@@ -5,7 +5,23 @@
     <div class="masterlist" id="masterlist"></div>
 </main>
 <table class="masterlist" id="masterlist">
-<tr><th>Song ID</th><th>Song Name</th><th>Link</th><th>User</th><th>Error?</th></tr>
+<tr>
+    <th>{% if currentpage == "asong_id" %}<a href="./dsong_id">
+        {% else %}<a href="./asong_id">{% endif %}
+        Song ID</a></th>
+    <th>{% if currentpage == "aname" %}<a href="./dname">
+        {% else %}<a href="./aname">{% endif %}
+        Song Name</a></th>
+    <th>{% if currentpage == "aurl" %}<a href="./durl">
+        {% else %}<a href="./aurl">{% endif %}
+        Link</a></th>
+    <th>{% if currentpage == "auser_name" %}<a href="./duser_name">
+        {% else %}<a href="./auser_name">{% endif %}
+        User</a></th>
+    <th>{% if currentpage == "aflag_error" %}<a href="./dflag_error">
+        {% else %}<a href="./aflag_error">{% endif %}
+        Error?</a></th>
+</tr>
 {% for song in masterlist: %}
     <tr><td>{{ song['song_id'] }}</td>
         <td>{{ song['name'] }}</td>
@@ -15,25 +31,4 @@
         </tr>
 {% endfor %}
 </table>
-<!--
-<div class="hiddensonglist" id="hiddensonglist">
-{% for song in songlist: %}
-    <div id="song">
-        <div id="song_id">{{ song['song_id'] }}</div>
-        <div id="name">{{ song['name'] }}</div>
-        <div id="url">{{ song['url'] }}</div>
-        <div id="user">{{ song['user_name'] }}</div>
-        <div id="error">{{ song['flag_error'] }}</div>
-    </div>
-{% endfor %}
-</div>
-<div class="hiddenuserlist" id="hiddenuserlist">
-{% for user in userlist: %}
-    <div id="user">
-        <div id="user_id">{{ user['user_id'] }}</div>
-        <div id="user_name">{{ user['user_name'] }}</div>
-    </div>
-{% endfor %}
-</div>
 {% endblock %}
--->
