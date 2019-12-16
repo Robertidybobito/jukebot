@@ -10,4 +10,15 @@
         </div>
     {% endfor %}
 </main>
+<div class="hiddensonglist" id="hiddensonglist">
+{% for song in songlist: %}
+    <div id="song">
+        <div id="song_id">{{ song['song_id'] }}</div>
+        <div id="name">{{ song['name'] }}</div>
+        <div id="url">{{ song['url'] }}</div>
+        <div id="user">{{ song['user_name'] }}</div>
+        <div id="error">{{ song['flag_error'] }}</div>
+    </div>
+{% endfor %}
+</div>
 {% endblock %}

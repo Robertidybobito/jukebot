@@ -38,18 +38,27 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 csrf.init_app(app)
 db = SQLAlchemy(app)
 
-def getMasterList():
-    masterlist = db.session.execute('select * from MasterList join SongInfo on song_id = id')
-    return masterlist
+def getUserList():
+    userlist = db.session.execute('select * from UserInfo')
+    return userlist
+
+def getSongList():
+    songlist = db.session.execute('select * from MasterList join SongInfo on song_id = id')
+    return songlist    
 
 @app.route('/')
 def musicplayer(): 
-    masterlist = getMasterList()
-    return render_template("musicplayer.html", masterlist=masterlist)
+    songlist = getSongList()
+    return render_template("musicplayer.html", 
+			    songlist=songlist)
 
-#@app.route('/login')
-#def login():
-#	form = LoginForm()
+@app.route('/songlist')
+def masterlist():
+    songlist = getSongList()
+    userlist = getUserList()
+    return render_template("songlist.html", 
+                            songlist=songlist,
+			    userlist=userlist)
 	
 @app.route('/editlist') # maybe change to /login/robert or /login/fritzy
 def editlist():

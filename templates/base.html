@@ -2,6 +2,7 @@
     <head>
         <link rel="stylesheet" href="/static/style.css">
         <script type="text/javascript" src="/static/musicplayer.js"></script>
+        <script type="text/javascript" src="/static/songlist.js"></script>
         <script src="https://www.youtube.com/iframe_api"></script>
     </head>
     <title>Jukebot</title>
@@ -13,7 +14,8 @@
         
         {% block navbar %}
         <nav>
-            <h1>Word List Program for {{name}}</h1>
+            <a href="/">Jukebot</a>
+            <a href="/songlist">Song List</a>
         </nav>
         {% endblock %}
 

@@ -9,13 +9,13 @@
     </div>
     <div id="justplayed"></div>
 </main>
-    <div class="hiddenmasterlist" id="hiddenmasterlist">
-        {% for song in masterlist: %}
-            <div id="song">
-                <div id="id">{{ song['id'] }}</div>
-                <div id="name">{{ song['name'] }}</div>
-                <div id="url">{{ song['url'] }}</div>
-            </div>
-        {% endfor %}
+<div class="hiddensonglist" id="hiddensonglist">
+{% for song in songlist: %}
+    <div id="song">
+        <div id="song_id">{{ song['song_id'] }}</div>
+        <div id="name">{{ song['name'] }}</div>
+        <div id="url">{{ song['url'] }}</div>
     </div>
+{% endfor %}
+</div>
 {% endblock %}
