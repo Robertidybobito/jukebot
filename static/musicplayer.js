@@ -108,12 +108,12 @@ function buildTable() {
 	var currentsong = document.getElementById("currentsong");
 	var justplayed = document.getElementById("justplayed");
 	
-	upnext.innerHTML = "Up Next";
+	upnext.innerHTML = "<h3>Up Next</h3>";
 	table(upnext, [4,5,6]);
 	
-	currentsong.innerHTML = "Current Song";
+	currentsong.innerHTML = "<h3>Current Song</h3>";
 	table(currentsong, [3]);
 	
-	justplayed.innerHTML = "Just Played";
+	justplayed.innerHTML = "<h3>Just Played</h3>";
 	table(justplayed, [2,1,0]);
 }

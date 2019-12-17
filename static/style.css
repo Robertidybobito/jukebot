@@ -1,11 +1,11 @@
 main {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    background-color: lightslategray;
+    background-color: lightgray;
 }
 
 nav {
-    background-color: lightgray;
+    background-color: lightgreen;
 }
 
 footer {
@@ -21,7 +21,7 @@ footer {
 }
 
 .githublink {
-    background-color: lightgray
+    background-color: lightgray;
     text-align: left;
 }
 
