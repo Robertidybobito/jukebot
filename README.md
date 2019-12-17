@@ -20,6 +20,14 @@ User login, store login in browser so there is no need to re-login
 
 Ability to change user information
 
+API setup to change the database without reloading the page
+
+Song skip button to instantly switch to the next song
+
+Song skip button also ands API message to the master list to increase num_times_skipped
+
+When song ends, send API message to the master list to increase num_times_played
+
 Detect an error on song playback and 
 1. play next song
 2. send API call to app.py to add '1' to the song's 'flag_error' without having to reload the page
