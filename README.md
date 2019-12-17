@@ -16,6 +16,6 @@ Hyperlink
 https://www.geeksforgeeks.org/how-to-create-a-link-in-javascript/
 https://www.thesitewizard.com/html-tutorial/open-links-in-new-window-or-tab.shtml
 Insert Item into Database
-https://towardsdatascience.com/sqlalchemy-python-tutorial-79a577141a91
+https://www.pythonsheets.com/notes/python-sqlalchemy.html
 
 https://canvas.umn.edu/courses/134934/assignments/846130
