@@ -3,20 +3,20 @@
 <main>
 <table class="masterlist" id="masterlist">
 <tr>
-    <th>{% if currentpage == "asong_id" %}<a href="./dsong_id">
-        {% else %}<a href="./asong_id">{% endif %}
+    <th>{% if currentpage == "asong_id" %}<a href="/songlist/dsong_id">
+        {% else %}<a href="/songlist/asong_id">{% endif %}
         Song ID</a></th>
-    <th>{% if currentpage == "aname" %}<a href="./dname">
-        {% else %}<a href="./aname">{% endif %}
+    <th>{% if currentpage == "aname" %}<a href="/songlist/dname">
+        {% else %}<a href="/songlist/aname">{% endif %}
         Song Name</a></th>
-    <th>{% if currentpage == "aurl" %}<a href="./durl">
-        {% else %}<a href="./aurl">{% endif %}
+    <th>{% if currentpage == "aurl" %}<a href="/songlist/durl">
+        {% else %}<a href="/songlist/aurl">{% endif %}
         Link</a></th>
-    <th>{% if currentpage == "auser_name" %}<a href="./duser_name">
-        {% else %}<a href="./auser_name">{% endif %}
+    <th>{% if currentpage == "auser_name" %}<a href="/songlist/duser_name">
+        {% else %}<a href="/songlist/auser_name">{% endif %}
         User</a></th>
-    <th>{% if currentpage == "aflag_error" %}<a href="./dflag_error">
-        {% else %}<a href="./aflag_error">{% endif %}
+    <th>{% if currentpage == "aflag_error" %}<a href="/songlist/dflag_error">
+        {% else %}<a href="/songlist/aflag_error">{% endif %}
         Error?</a></th>
 </tr>
 {% for song in masterlist: %}

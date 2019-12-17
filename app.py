@@ -17,7 +17,7 @@ class NewSongForm(FlaskForm):
         # Regexp(r'^[a-z]+$', message="must contain letters only"),
         Optional(strip_whitespace=True)
     ])
-    song_url = IntegerField("Song URL", validators= [
+    song_url = StringField("Song URL", validators= [
         # NumberRange(min=3, max=10),
         Optional(strip_whitespace=True)
     ])
@@ -43,7 +43,7 @@ def getUserList():
     return db.session.execute('select * from UserInfo')
     
 def getSongList():
-    return db.session.execute('select * from MasterList join SongInfo')
+    return db.session.execute('select * from MasterList join SongInfo on song_id=song_id_')
     
 def getMasterList(sort):
     return db.session.execute('select song_id, name, url, user_name, flag_error from MasterList join SongInfo on song_id=song_id_ join UserInfo on user_id=user_id_ {}'.format(sort))
@@ -53,13 +53,11 @@ def getEditList(user):
 
 def getNewSongID():
     song_id_list = db.session.execute('select song_id from MasterList order by song_id desc limit 1')
-    song_id = 0
     for song in song_id_list: song_id = song['song_id']
-    return song_id
+    return song_id + 1
     
 def getUserID(username):
     user_id_list = db.session.execute('select user_id_ from UserInfo where user_name="{}"'.format(username))
-    user_id = 0
     for user in user_id_list: user_id = user['user_id_']
     return user_id
 
@@ -68,6 +66,12 @@ def addSong(name, url, username):
     user_id = getUserID(username)
     today = date.today()
     db.session.execute("INSERT INTO 'SongInfo' VALUES ('{}','{}','{}','{}','{}')".format(song_id, user_id, name, url, today))
+    db.session.execute("INSERT INTO 'MasterList' VALUES ('{}','0','0','0')".format(song_id))
+    db.session.commit()
+    
+def deleteSong(delete_id):
+    db.session.execute("DELETE FROM 'SongInfo' WHERE song_id_='{}'".format(delete_id))
+    db.session.execute("DELETE FROM 'MasterList' WHERE song_id='{}'".format(delete_id))
     db.session.commit()
 
 @app.route('/')
@@ -101,13 +105,19 @@ def selectlist():
 @app.route('/editlist/<username>', methods=['POST','GET'])
 def editlist(username):
     form = NewSongForm()
-    # if form.song_name.data != "" and form.song_url.data != "":
-    addSong("1, 2 Oatmeal", "https://www.youtube.com/watch?v=0Dpw0VvH4m0", username)
+    if form.song_name.data != "" and form.song_name.data != None and form.song_url.data != "": addSong(form.song_name.data, form.song_url.data, username)
+    form.song_name.data = ""
+    form.song_url.data = ""
     editlist = getEditList(username)
     return render_template("editlist.html",
                             form=form,
 			    editlist=editlist,
 			    username=username)
+			    
+@app.route('/editlist/<username>/deletesong/<delete_id>', methods=['POST','GET'])
+def editlist2(username, delete_id):
+    deleteSong(delete_id)
+    return editlist(username)
 
 @app.route('/proxy')
 def proxy():
