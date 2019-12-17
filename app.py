@@ -52,10 +52,16 @@ def getEditList(user):
     return db.session.execute('select song_id, name, url, user_name, flag_error from MasterList join SongInfo on song_id=song_id_ join UserInfo on user_id=user_id_ where user_name="{}" order by song_id'.format(user))
 
 def getNewSongID():
-    return db.session.execute('select song_id from MasterList order by song_id desc limit 1')
+    song_id_list = db.session.execute('select song_id from MasterList order by song_id desc limit 1')
+    song_id = 0
+    for song in song_id_list: song_id = song['song_id']
+    return song_id
     
 def getUserID(username):
-    return db.session.execute('select user_id_ from UserInfo where user_name="{}"'.format(username))
+    user_id_list = db.session.execute('select user_id_ from UserInfo where user_name="{}"'.format(username))
+    user_id = 0
+    for user in user_id_list: user_id = user['user_id_']
+    return user_id
 
 def addSong(name, url, username):
     song_id = getNewSongID()
