@@ -109,7 +109,7 @@ function buildTable() {
 	var justplayed = document.getElementById("justplayed");
 	
 	upnext.innerHTML = "<h3>Up Next</h3>";
-	table(upnext, [4,5,6]);
+	table(upnext, [6,5,4]);
 	
 	currentsong.innerHTML = "<h3>Current Song</h3>";
 	table(currentsong, [3]);
