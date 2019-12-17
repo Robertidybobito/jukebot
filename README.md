@@ -25,7 +25,7 @@ https://developers.google.com/youtube/iframe_api_reference
 
 ## 5. Detailed Description of the project (No more than 500 words)
 
-The Jukebot is intended to be a place where my friends and I can add songs to our personal song lists and listen to everyone's songs. Currently, the Jukebot will only work with YouTube video links.
+The Jukebot is a website where my friends and I can add songs to our personal song lists and listen to everyone's songs. Currently, the Jukebot will only work with YouTube video links.
 
 ## 6. List of Controllers and their short description (No more than 50 words for each controller)
 
