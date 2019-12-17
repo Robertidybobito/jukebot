@@ -2,7 +2,7 @@ from flask import Flask, request, Response, render_template, g
 import requests
 import itertools
 from flask_sqlalchemy import SQLAlchemy
-#from flask_bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap
 from flask_wtf.csrf import CSRFProtect
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField
@@ -14,26 +14,16 @@ from datetime import date
 
 class NewSongForm(FlaskForm):
     song_name = StringField("Song Name", validators= [
-        # Regexp(r'^[a-z]+$', message="must contain letters only"),
         Optional(strip_whitespace=True)
     ])
     song_url = StringField("Song URL", validators= [
-        # NumberRange(min=3, max=10),
         Optional(strip_whitespace=True)
     ])
     submit = SubmitField("Submit")
 
-class LoginForm(FlaskForm):
-    username = StringField("Username", validators= [
-	    Optional(strip_whitespace=True)
-    ])
-    password = StringField("Password", validators= [
-	    Optional(strip_whitespace=True)
-    ])
-    login = SubmitField("Login")
-
 csrf = CSRFProtect()
 app = Flask(__name__)
+Bootstrap(app)
 app.config["SECRET_KEY"] = "row the boat"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 csrf.init_app(app)

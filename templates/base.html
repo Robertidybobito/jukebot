@@ -3,25 +3,22 @@
         <link rel="stylesheet" href="/static/style.css">
     </head>
     <title>Jukebot</title>
+    {% extends "bootstrap/base.html" %}
+    {% block navbar %}
     <nav>
-        <h1 class="title">Jukebot</h1>
-        <div class="name">Robert Berquist</div>
+    <h1 class="title">Jukebot</h1>
+    <div class="name">Robert Berquist</div>
+    <div id="pagelinks">
+        <a href="/">Jukebot</a> | 
+        <a href="/songlist">Song List</a> | 
+        <a href="/editlist">Edit List</a> | 
+        <a href="https://github.com/Robertidybobito/jukebot" target="_blank">GitHub</a>
+    </div>
     </nav>
+    {% endblock %}
     <body>
-        
-        {% block navbar %}
-        <nav>
-            <a href="/">Jukebot</a>
-            <a href="/songlist">Song List</a>
-            <a href="/editlist">Edit List</a>
-        </nav>
-        {% endblock %}
-
         {% block content %}
         default content
         {% endblock %}
     </body>
-    <footer>
-        <a href="https://github.com/Robertidybobito/jukebot">GitHub Link</a>
-    </footer>
 </html>
