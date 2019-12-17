@@ -10,10 +10,11 @@ from wtforms.validators import Regexp, Optional, NumberRange
 import re
 import json
 import records
+from datetime import date
 
 class NewSongForm(FlaskForm):
     song_name = StringField("Song Name", validators= [
-        Regexp(r'^[a-z]+$', message="must contain letters only"),
+        # Regexp(r'^[a-z]+$', message="must contain letters only"),
         Optional(strip_whitespace=True)
     ])
     song_url = IntegerField("Song URL", validators= [
@@ -49,7 +50,20 @@ def getMasterList(sort):
     
 def getEditList(user):
     return db.session.execute('select song_id, name, url, user_name, flag_error from MasterList join SongInfo on song_id=song_id_ join UserInfo on user_id=user_id_ where user_name="{}" order by song_id'.format(user))
+
+def getNewSongID():
+    return db.session.execute('select song_id from MasterList order by song_id desc limit 1')
     
+def getUserID(username):
+    return db.session.execute('select user_id_ from UserInfo where user_name="{}"'.format(username))
+
+def addSong(name, url, username):
+    song_id = getNewSongID()
+    user_id = getUserID(username)
+    today = date.today()
+    db.session.execute("INSERT INTO 'SongInfo' VALUES ('{}','{}','{}','{}','{}')".format(song_id, user_id, name, url, today))
+    db.session.commit()
+
 @app.route('/')
 def musicplayer(): 
     songlist = getSongList()
@@ -78,13 +92,17 @@ def selectlist():
     return render_template("selectuser.html", 
 			    userlist=userlist)
 
-@app.route('/editlist/<username>')
+@app.route('/editlist/<username>', methods=['POST','GET'])
 def editlist(username):
+    form = NewSongForm()
+    # if form.song_name.data != "" and form.song_url.data != "":
+    addSong("1, 2 Oatmeal", "https://www.youtube.com/watch?v=0Dpw0VvH4m0", username)
     editlist = getEditList(username)
     return render_template("editlist.html",
-                            editlist=editlist,
+                            form=form,
+			    editlist=editlist,
 			    username=username)
-    
+
 @app.route('/proxy')
 def proxy():
     result = requests.get(request.args['url'])

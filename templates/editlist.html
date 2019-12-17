@@ -1,23 +1,26 @@
 {% extends "base.html" %}
+{% from "_formhelpers.html" import render_field %}
 {% block content %}
 <h1>Add Song for {{ username }}</h1>
-
+<form action="/editlist/{{ username }}" method="post">
+    {{ form.hidden_tag() }}
+    {{ render_field(form.song_name) }}
+    <br />
+    {{ form.hidden_tag() }}
+    {{ render_field(form.song_url) }}
+    <br />
+    {{ form.submit() }}
+</form>
+song = {{ form.song_name.data }} <br />
+url = {{ form.song_url.data }}
 <h1>Edit List for {{ username }}</h1>
 <table class="masterlist" id="masterlist">
 <tr>
     <th> </th>
-    <th>{% if currentpage == "asong_id" %}<a href="./dsong_id">
-        {% else %}<a href="./asong_id">{% endif %}
-        Song ID</a></th>
-    <th>{% if currentpage == "aname" %}<a href="./dname">
-        {% else %}<a href="./aname">{% endif %}
-        Song Name</a></th>
-    <th>{% if currentpage == "aurl" %}<a href="./durl">
-        {% else %}<a href="./aurl">{% endif %}
-        Link</a></th>
-    <th>{% if currentpage == "aflag_error" %}<a href="./dflag_error">
-        {% else %}<a href="./aflag_error">{% endif %}
-        Error?</a></th>
+    <th>Song ID</th>
+    <th>Song Name</th>
+    <th>Link</th>
+    <th>Error?</th>
 </tr>
 {% for song in editlist: %}
     <tr><td><button><a href="./editlist/{{ username }}/song_id={{ song['song_id'] }}">Edit</a></button></td>
