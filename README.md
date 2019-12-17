@@ -2,7 +2,15 @@
 
 The Jukebot is a website where my friends and I can add songs to our personal song lists and listen to everyone's songs. Currently, the Jukebot will only work with YouTube video links.
 
-## Future Implentations
+## Currently Implemented
+
+v1.0: load song list from database and play songs
+
+v1.0: view songlist from '/songlist'
+
+v1.0: add new songs through form on /'editlist/<username>'
+
+## Future Implementations
 
 Automatically push changes to the database to github master database.db
 
