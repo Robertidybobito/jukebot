@@ -26,3 +26,9 @@ Detect an error on song playback and
 2. send API call to app.py to add '1' to the song's 'flag_error' without having to reload the page
 3. modify js songlist to take that song out of the current rotation
 4. if song is already in Up Next, detect, push list forward and get a new song
+
+### Resources
+
+## GitPython
+
+

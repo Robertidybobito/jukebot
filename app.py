@@ -11,6 +11,7 @@ import re
 import json
 import records
 from datetime import date
+from git import Repo
 
 class NewSongForm(FlaskForm):
     song_name = StringField("Song Name", validators= [
@@ -28,6 +29,7 @@ app.config["SECRET_KEY"] = "row the boat"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 csrf.init_app(app)
 db = SQLAlchemy(app)
+repo = Repo("https://github.com/Robertidybobito/jukebox")
 
 def getUserList():
     return db.session.execute('select * from UserInfo')
