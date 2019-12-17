@@ -1,29 +1,4 @@
-# Jukebot Hero(ku)
-
-## 1. Project Type: Plan A or B or C
-
-Plan A
-
-## 2. Link to live Application:
-
-CAUTION: The main page loads YouTube videos and automatically starts playing them. You may want to mute or lower your computer volume if 
-you are in a public area. 
-
-https://jukebot-heroku.herokuapp.com/
-
-## 3. Link to Github Code Repository: Make sure that you provide the link to project code and not the link to your GitHub repository.
-
-I see the note in Canvas - Discussions about how I should "share the link of the project code on github and not just the home page of your GitHub repository." I'm not sure exactly what that means, but all of my code can be easily found here:
-
-https://github.com/Robertidybobito/jukebot
-
-## 4. List of Technologies/API's Used
-
-YouTube Player API
-
-https://developers.google.com/youtube/iframe_api_reference
-
-## 5. Detailed Description of the project (No more than 500 words)
+# Jukebot
 
 The Jukebot is a website where my friends and I can add songs to our personal song lists and listen to everyone's songs. Currently, the Jukebot will only work with YouTube video links.
 
@@ -90,6 +65,7 @@ Stores unchangable information about each song. Columns are: song_id_, user_id, 
 Stores information on the users, the owners of song list. Columns are: user_id_, user_name, email, and last_login.
 
 9. References/Resources: List all the references, resources or the online templates that were used for the project.
+
 ### YouTube API References
 
 https://tutorialzine.com/2015/08/how-to-control-youtubes-video-player-with-javascript
