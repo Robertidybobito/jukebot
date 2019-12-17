@@ -11,8 +11,6 @@
     <br />
     {{ form.submit() }}
 </form>
-song = {{ form.song_name.data }} <br />
-url = {{ form.song_url.data }}
 <h1>Edit List for {{ username }}</h1>
 <table class="masterlist" id="masterlist">
 <tr>
@@ -26,7 +24,7 @@ url = {{ form.song_url.data }}
     <tr><td><button><a href="./editlist/{{ username }}/song_id={{ song['song_id'] }}">Edit</a></button></td>
         <td>{{ song['song_id'] }}</td>
         <td>{{ song['name'] }}</td>
-        <td><a href="{{ song['url'] }}" target="_blank">YouTube</a></td>
+        <td><a href="{{ song['url'] }}" target="_blank">{{ song['url'] }}</a></td>
         <td>{% if song['flag_error'] == 1 %}Yes{% endif %}</td>
         </tr>
 {% endfor %}
