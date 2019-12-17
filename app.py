@@ -29,14 +29,14 @@ app.config["SECRET_KEY"] = "row the boat"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 csrf.init_app(app)
 db = SQLAlchemy(app)
-repo = Repo("https://github.com/Robertidybobito/jukebox")
+repo = Repo("https://github.com/Robertidybobito/jukebox/tree/v1.1")
 
 def getUserList():
     return db.session.execute('select * from UserInfo')
     
 def getSongList():
     return db.session.execute('select * from MasterList join SongInfo on song_id=song_id_')
-    
+
 def getMasterList(sort):
     return db.session.execute('select song_id, name, url, user_name, flag_error from MasterList join SongInfo on song_id=song_id_ join UserInfo on user_id=user_id_ {}'.format(sort))
     
@@ -53,6 +53,15 @@ def getUserID(username):
     for user in user_id_list: user_id = user['user_id_']
     return user_id
 
+def gitPush(message):
+    try:
+        repo.git.add(update=True)
+        repo.index.commit(message)
+        origin = repo.remote(name='origin')
+        origin.push()
+    except:
+        print('Error when pushing to github')    
+
 def addSong(name, url, username):
     song_id = getNewSongID()
     user_id = getUserID(username)
@@ -60,11 +69,13 @@ def addSong(name, url, username):
     db.session.execute("INSERT INTO 'SongInfo' VALUES ('{}','{}','{}','{}','{}')".format(song_id, user_id, name, url, today))
     db.session.execute("INSERT INTO 'MasterList' VALUES ('{}','0','0','0')".format(song_id))
     db.session.commit()
+    gitPush("Add new song {} at song_id = {} by user = {}".format(name, song_id, username))
     
 def deleteSong(delete_id):
     db.session.execute("DELETE FROM 'SongInfo' WHERE song_id_='{}'".format(delete_id))
     db.session.execute("DELETE FROM 'MasterList' WHERE song_id='{}'".format(delete_id))
     db.session.commit()
+    gitPush("Delete song {} at song_id = {} by user = {}".format(name, song_id, username))
 
 @app.route('/')
 def musicplayer(): 
