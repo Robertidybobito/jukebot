@@ -1,7 +1,5 @@
 # Jukebot
 
-# Jukebot
-
 The Jukebot is a website where my friends and I can add songs to our personal song lists and listen to everyone's songs. Currently, the Jukebot will only work with YouTube video links. This website was my final project for CSCI4131 at the University of Minnesota.
 
 ## Currently Implemented
@@ -89,21 +87,21 @@ Pulls the full song list from the database and opens the main page, musicplayer.
 
 Joins all of the tables together and opens the song list page, songlist.html
 
-### @app.route('/songlist/<input>')
+### @app.route('/songlist/`<input>`')
 
-Same as the above, but the <input> is how the SQL call sorts the table. For example, if <input> is dname, then the table given to songlist.html will use "order by name desc"
+Same as the above, but the `<input>` is how the SQL call sorts the table. For example, if <input> is dname, then the table given to songlist.html will use "order by name desc"
 
 ### @app.route('/editlist')
 
 Pulls the list of user information and opens selectuser.html
 
-### @app.route('/editlist/<username>'
+### @app.route('/editlist/`<username>`'
 
 Pulls the list of the specified user's songs and opens editlist.html. If the form on editlist.html is submitted with a song name and url, this controller will add that information to the database with the user's name, today's date and assigns the song a new ID number.
 
-### @app.route('/editlist/<username>/deletesong/<delete_id>'
+### @app.route('/editlist/`<username>`/deletesong/`<delete_id>`'
   
-Same as '/editlist/<username>', but someone clicked the "Delete" button next to one of the songs. <delete_id> is that song's ID number, so this controller removes that song from the SongInfo list and MasterList.
+Same as '/editlist/`<username>`', but someone clicked the "Delete" button next to one of the songs. <delete_id> is that song's ID number, so this controller removes that song from the SongInfo list and MasterList.
   
 ## 7. List of Views and their short description (No more than 50 words for each view)
 
