@@ -10,7 +10,7 @@ v1.0: view songlist from '/songlist'
 
 v1.0: add new songs through form on /'editlist/<username>'
 
-## Future Implementations
+## Ideas for the rest of v1
 
 Automatically push changes to the database to github master database.db
 
