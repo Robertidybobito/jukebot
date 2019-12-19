@@ -38,6 +38,8 @@ User login, store login in browser so there is no need to re-login
 
 Ability to change user information
 
+Create custom playlists, or save database parameters (from `<user>`, genre `<genre>`
+
 Possible email password recovery..?
 
 On '/', allow user to select which lists they want to hear from 
