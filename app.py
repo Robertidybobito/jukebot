@@ -11,6 +11,7 @@ import re
 import json
 import records
 from datetime import date
+# from github import Github, InputGitTreeElement
 from git import Repo
 
 class NewSongForm(FlaskForm):
@@ -29,7 +30,12 @@ app.config["SECRET_KEY"] = "row the boat"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 csrf.init_app(app)
 db = SQLAlchemy(app)
-repo = Repo("https://github.com/Robertidybobito/jukebox/tree/v1.1")
+
+token = "45b7d5b77454971e2c7995fc8dc3380f3a10b96e"
+repo = Repo('.')
+# g = Github(token)
+# repo = g.get_user().get_repo('jukebot')
+database_file = "database.db"
 
 def getUserList():
     return db.session.execute('select * from UserInfo')
@@ -54,14 +60,11 @@ def getUserID(username):
     return user_id
 
 def gitPush(message):
-    try:
-        repo.git.add(update=True)
-        repo.index.commit(message)
-        origin = repo.remote(name='origin')
-        origin.push()
-    except:
-        print('Error when pushing to github')    
-
+    repo.index.add([database_file])
+    repo.index.commit(message)
+    origin = repo.remote('origin')
+    origin.push()
+    
 def addSong(name, url, username):
     song_id = getNewSongID()
     user_id = getUserID(username)
@@ -75,21 +78,21 @@ def deleteSong(delete_id):
     db.session.execute("DELETE FROM 'SongInfo' WHERE song_id_='{}'".format(delete_id))
     db.session.execute("DELETE FROM 'MasterList' WHERE song_id='{}'".format(delete_id))
     db.session.commit()
-    gitPush("Delete song {} at song_id = {} by user = {}".format(name, song_id, username))
+    gitPush("Delete song_id = {}".format(delete_id)) 
 
 @app.route('/')
 def musicplayer(): 
     songlist = getSongList()
     return render_template("musicplayer.html", 
-			    songlist=songlist)
+                            songlist=songlist)
 
 @app.route('/songlist')
 def defaultmasterlist():
     masterlist = getMasterList("")
     return render_template("songlist.html", 
                             masterlist=masterlist,
-			    currentpage="")
-	
+                            currentpage="")
+        
 @app.route('/songlist/<input>')
 def masterlist(input):
     sort = "order by " + input[1:]
@@ -97,13 +100,13 @@ def masterlist(input):
     masterlist = getMasterList(sort)
     return render_template("songlist.html",
                             masterlist=masterlist,
-			    currentpage=input)
-			    
+                            currentpage=input)
+                            
 @app.route('/editlist')
 def selectlist():
     userlist = getUserList()
     return render_template("selectuser.html", 
-			    userlist=userlist)
+                            userlist=userlist)
 
 @app.route('/editlist/<username>', methods=['POST','GET'])
 def editlist(username):
@@ -114,9 +117,9 @@ def editlist(username):
     editlist = getEditList(username)
     return render_template("editlist.html",
                             form=form,
-			    editlist=editlist,
-			    username=username)
-			    
+                            editlist=editlist,
+                            username=username)
+                            
 @app.route('/editlist/<username>/deletesong/<delete_id>', methods=['POST','GET'])
 def editlist2(username, delete_id):
     deleteSong(delete_id)

@@ -34,3 +34,6 @@ Detect an error on song playback and
 https://gitpython.readthedocs.io/en/stable/
 
 https://stackoverflow.com/questions/41836988/git-push-via-gitpython
+
+https://github.com/PyGithub/PyGithub
+
