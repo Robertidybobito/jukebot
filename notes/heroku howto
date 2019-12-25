@@ -1,0 +1,33 @@
+1) tell it how to build the app
+	Python -> requirements.txt file
+	pip freeze creates the requirements.txt file
+2) what runtime environment should Heroku be using
+	contained in runtime.txt
+	we just put in the version on Python we use
+3) How to run?
+	Procfile // capital P, plain text file
+	web: gunicorn
+	app: app
+	(might be "web: gunicorn app:app")
+	app:app because of our app.py file and app object
+
+this will all be packaged in a git repo
+	remote repo that is on heroku
+	remote - heroku
+
+--------------------------------
+install the heroku command line
+> heroku version
+> heroku login
+> git init
+intializes an empty repo
+> git add
+> git commit
+> heroku create
+creates an app for you
+> git remote -v
+should tell me "heroku https://git.heroku.com/..."
+if wrong, will say "https://git.umn.edu/..."
+> pip list
+tells us everything we have installed
+may need to use pip install
