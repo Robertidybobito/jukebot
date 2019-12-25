@@ -37,3 +37,4 @@ https://stackoverflow.com/questions/41836988/git-push-via-gitpython
 
 https://github.com/PyGithub/PyGithub
 
+https://stackoverflow.com/questions/38594717/how-do-i-push-new-files-to-github
